@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería La Esquina | Cuidado & Estilo Masculino</title>
+    <meta name="description" content="Barbería de barrio tradicional y moderna. Cortes de cabello, arreglos de barba y atención personalizada.">
+    
+    <!-- FUENTES GOOGLE FONTS CON FALLBACK NATIVO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- TAILWIND CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            black: '#1a1a1a',
+                            dark: '#242424',
+                            gray: '#353535',
+                            gold: '#D6AE28',
+                            goldhover: '#e5bd33',
+                            cream: '#F3EEE4'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- CSS AUTOCONTENIDO ULTRA COMPATIBLE -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #1a1a1a !important;
+            color: #F3EEE4 !important;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Cinzel', Georgia, serif;
+        }
+
+        /* Garantía de visibilidad para las vistas SPA */
+        .page-view {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        .page-view.active {
+            display: block !important;
+            opacity: 1 !important;
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #E6C244 0%, #D6AE28 50%, #B38E1B 100%);
+            color: #1a1a1a;
+        }
+
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #FCE38A 0%, #D6AE28 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border {
+            border: 1px solid rgba(214, 174, 40, 0.35);
+        }
+
+        .gold-border-b {
+            border-bottom: 1px solid rgba(214, 174, 40, 0.35);
+        }
+
+        .card-bg {
+            background-color: #242424;
+        }
+
+        /* Transiciones suaves */
+        a, button {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-brand-black text-brand-cream antialiased min-h-screen flex flex-col selection:bg-brand-gold selection:text-brand-black">
+
+    <!-- AVISO DE PENDIENTE DE VALIDACIÓN -->
+    <div class="bg-brand-gold text-brand-black text-center text-xs font-bold py-1 px-4 tracking-wider uppercase z-50">
+        📌 Proyecto Web — Información y precios pendientes de confirmación final por el propietario
+    </div>
+
+    <!-- ENCABEZADO Y NAVEGACIÓN PRINCIPAL MULTIPÁGINA -->
+    <header class="sticky top-0 z-40 bg-brand-dark border-b border-brand-gray/50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- LOGO SVG E ILUSTRACIÓN -->
+                <a href="#" onclick="navigateTo('inicio', event)" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 rounded-full bg-brand-gold flex items-center justify-center text-brand-black font-bold font-serif text-xl group-hover:scale-105 transition-transform">
+                        ✂️
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif font-bold text-lg sm:text-xl text-brand-cream group-hover:text-brand-gold transition-colors tracking-wide">LA ESQUINA</span>
+                        <span class="text-[10px] uppercase tracking-widest text-brand-gold font-semibold">Barbería & Grooming</span>
+                    </div>
+                </a>
+
+                <!-- MENÚ ESCRITORIO (NAVEGACIÓN MULTIPÁGINA) -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <a href="#inicio" onclick="navigateTo('inicio', event)" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-brand-gold text-brand-cream hover:bg-brand-gray/30" data-page="inicio">Inicio</a>
+                    <a href="#nosotros" onclick="navigateTo('nosotros', event)" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-brand-gold text-brand-cream hover:bg-brand-gray/30" data-page="nosotros">Nosotros</a>
+                    <a href="#servicios" onclick="navigateTo('servicios', event)" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-brand-gold text-brand-cream hover:bg-brand-gray/30" data-page="servicios">Servicios</a>
+                    <a href="#galeria" onclick="navigateTo('galeria', event)" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-brand-gold text-brand-cream hover:bg-brand-gray/30" data-page="galeria">Galería</a>
+                    <a href="#faq" onclick="navigateTo('faq', event)" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-brand-gold text-brand-cream hover:bg-brand-gray/30" data-page="faq">Preguntas</a>
+                    <a href="#contacto" onclick="navigateTo('contacto', event)" class="nav-link px-3 py-2 rounded-md text-sm font-medium transition-colors hover:text-brand-gold text-brand-cream hover:bg-brand-gray/30" data-page="contacto">Contacto</a>
+                </nav>
+
+                <!-- BOTÓN RESERVAR WHATSAPP -->
+                <div class="hidden md:flex items-center">
+                    <a href="https://wa.me/570000000000?text=Hola,%20me%20gustaria%20agendar%20una%20cita%20en%20Barberia%20La%20Esquina" target="_blank" rel="noopener noreferrer" class="gold-gradient px-5 py-2.5 rounded-md font-semibold text-sm shadow-md hover:brightness-110 flex items-center space-x-2 transition-transform hover:-translate-y-0.5">
+                        <span>💬 Reservar por WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- BOTÓN MENÚ MÓVIL (HAMBURGUESA) -->
+                <div class="flex md:hidden">
+                    <button type="button" id="mobile-menu-btn" onclick="toggleMobileMenu()" class="text-brand-cream hover:text-brand-gold p-2 rounded-md focus:outline-none" aria-label="Abrir menú">
+                        <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENÚ DESPLEGABLE MÓVIL -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark border-b border-brand-gray px-4 pt-2 pb-6 space-y-2">
+            <a href="#inicio" onclick="navigateTo('inicio', event); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-brand-cream hover:bg-brand-gray hover:text-brand-gold">Inicio</a>
+            <a href="#nosotros" onclick="navigateTo('nosotros', event); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-brand-cream hover:bg-brand-gray hover:text-brand-gold">Nosotros</a>
+            <a href="#servicios" onclick="navigateTo('servicios', event); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-brand-cream hover:bg-brand-gray hover:text-brand-gold">Servicios y Precios</a>
+            <a href="#galeria" onclick="navigateTo('galeria', event); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-brand-cream hover:bg-brand-gray hover:text-brand-gold">Galería de Estilos</a>
+            <a href="#faq" onclick="navigateTo('faq', event); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-brand-cream hover:bg-brand-gray hover:text-brand-gold">Preguntas Frecuentes</a>
+            <a href="#contacto" onclick="navigateTo('contacto', event); toggleMobileMenu();" class="block px-3 py-2 rounded-md text-base font-medium text-brand-cream hover:bg-brand-gray hover:text-brand-gold">Contacto y Ubicación</a>
+            
+            <div class="pt-4">
+                <a href="https://wa.me/570000000000?text=Hola,%20quisiera%20agendar%20un%20turno" target="_blank" class="w-full text-center block gold-gradient py-3 rounded-md font-bold text-brand-black shadow-lg">
+                    💬 Reservar Turno por WhatsApp
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL MULTIPÁGINA -->
+    <main class="flex-grow">
+        
+        <!-- PÁGINA 1: INICIO -->
+        <section id="inicio" class="page-view active">
+            <!-- HERO SECTION -->
+            <div class="relative bg-brand-dark overflow-hidden py-16 lg:py-24 border-b border-brand-gray/40">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <div class="inline-flex items-center space-x-2 gold-border bg-brand-black/60 px-3.5 py-1.5 rounded-full mb-6">
+                                <span class="w-2 h-2 rounded-full bg-brand-gold animate-pulse"></span>
+                                <span class="text-xs uppercase tracking-widest text-brand-gold font-bold">Barbería de Barrio Tradicional</span>
+                            </div>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-serif leading-tight text-brand-cream mb-6">
+                                Estilo, Tradición y <span class="text-gold-gradient">Corte Perfecto</span>
+                            </h1>
+                            <p class="text-lg text-brand-cream/80 mb-8 max-w-xl leading-relaxed">
+                                Ofrecemos cortes modernos, degradados impecables y perfilado de barba con atención personalizada en un ambiente cercano y confortable.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="https://wa.me/570000000000?text=Hola,%20quiero%20reservar%20un%20corte" target="_blank" class="gold-gradient text-center px-8 py-4 rounded-md font-bold text-base shadow-xl hover:brightness-110 transition-all flex items-center justify-center space-x-2">
+                                    <span>✂️ Agendar Cita en WhatsApp</span>
+                                </a>
+                                <a href="#servicios" onclick="navigateTo('servicios', event)" class="gold-border text-center px-8 py-4 rounded-md font-semibold text-brand-cream hover:bg-brand-gray/50 transition-colors">
+                                    Ver Servicios y Precios
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- ILUSTRACIÓN VECTORIAL SVG EN LUGAR DE FOTO INTERNET -->
+                        <div class="relative flex justify-center">
+                            <div class="w-full max-w-md aspect-square bg-gradient-to-br from-brand-gray to-brand-black rounded-2xl gold-border p-8 flex flex-col items-center justify-center text-center shadow-2xl relative overflow-hidden">
+                                <svg class="w-32 h-32 text-brand-gold mb-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="6" cy="6" r="3"/>
+                                    <circle cx="6" cy="18" r="3"/>
+                                    <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+                                    <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+                                    <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+                                </svg>
+                                <h3 class="font-serif font-bold text-2xl text-brand-gold mb-2">LA ESQUINA</h3>
+                                <p class="text-sm text-brand-cream/70 max-w-xs">Especialistas en cortes Fade, perfilado de barba a navaja y grooming masculino.</p>
+                                <div class="mt-6 text-xs text-brand-gold border border-brand-gold/40 px-3 py-1 rounded-full">
+                                    📍 Atendido por Barberos Expertos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POR QUÉ ELEGIRNOS (BENEFICIOS) -->
+            <div class="py-16 bg-brand-black">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-12">
+                        <h2 class="text-3xl font-bold font-serif text-brand-cream mb-4">¿Por qué Barbería La Esquina?</h2>
+                        <p class="text-brand-cream/70">Un espacio pensado para que te sientas cómodo y salgas con el mejor estilo.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="card-bg p-8 rounded-xl gold-border text-center">
+                            <div class="w-14 h-14 mx-auto rounded-full bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold text-2xl mb-4">
+                                ✂️
+                            </div>
+                            <h3 class="font-serif font-bold text-xl text-brand-cream mb-3">Atención Personalizada</h3>
+                            <p class="text-sm text-brand-cream/70 leading-relaxed">Escuchamos tu gusto y asesoramos el corte que mejor resalte tus facciones y estilo único.</p>
+                        </div>
+
+                        <div class="card-bg p-8 rounded-xl gold-border text-center">
+                            <div class="w-14 h-14 mx-auto rounded-full bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold text-2xl mb-4">
+                                🤝
+                            </div>
+                            <h3 class="font-serif font-bold text-xl text-brand-cream mb-3">Ambiente de Barrio</h3>
+                            <p class="text-sm text-brand-cream/70 leading-relaxed">Un espacio cercano, limpio y familiar para relajarte mientras cuidamos de tu cabello y barba.</p>
+                        </div>
+
+                        <div class="card-bg p-8 rounded-xl gold-border text-center">
+                            <div class="w-14 h-14 mx-auto rounded-full bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold text-2xl mb-4">
+                                ⏱️
+                            </div>
+                            <h3 class="font-serif font-bold text-xl text-brand-cream mb-3">Puntualidad y Agilidad</h3>
+                            <p class="text-sm text-brand-cream/70 leading-relaxed">Reserva tu turno previamente por WhatsApp y evita largas esperas innecesarias.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA 2: NOSOTROS -->
+        <section id="nosotros" class="page-view py-16 bg-brand-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-brand-gold text-sm uppercase tracking-widest font-bold">NUESTRA HISTORIA</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-serif text-brand-cream mt-2">Tradición y Pasión por la Barbería</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6 text-brand-cream/80 text-base leading-relaxed">
+                        <p>
+                            <strong>Barbería La Esquina</strong> nació como un emprendimiento local con la misión de ofrecer un servicio de cuidado personal masculino de alta calidad, cercano y accesible para los vecinos del sector.
+                        </p>
+                        <p>
+                            Nos apasiona el oficio tradicional de la barbería combinado con las tendencias actuales en cortes degradados (Fade), perfilados a navaja y tratamientos para el cuidado de la barba.
+                        </p>
+                        <div class="p-6 card-bg gold-border rounded-lg space-y-4">
+                            <h4 class="font-serif text-lg font-bold text-brand-gold">Nuestra Misión</h4>
+                            <p class="text-sm text-brand-cream/90">
+                                Brindar un servicio de barbería de calidad con atención amable, puntualidad y resultados acordes al estilo de cada cliente, construyendo confianza constante con la comunidad.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- GRÁFICO VECTORIAL NOSOTROS -->
+                    <div class="card-bg gold-border p-8 rounded-2xl text-center flex flex-col items-center justify-center space-y-4">
+                        <svg class="w-24 h-24 text-brand-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/>
+                            <path d="M12 8v4l3 3"/>
+                        </svg>
+                        <h3 class="font-serif text-2xl text-brand-cream font-bold">Atención Cercana y Profesional</h3>
+                        <p class="text-sm text-brand-cream/70 max-w-sm">
+                            [Información sobre el fundador y fecha exacta de apertura pendiente de confirmar por el propietario].
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA 3: SERVICIOS Y PRECIOS -->
+        <section id="servicios" class="page-view py-16 bg-brand-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-brand-gold text-sm uppercase tracking-widest font-bold">MENÚ DE SERVICIOS</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-serif text-brand-cream mt-2">Cortes, Barba y Combos</h2>
+                    <p class="text-brand-cream/70 mt-2">Tarifas de referencia sujetas a confirmación final.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- SERVICIO 1 -->
+                    <div class="card-bg gold-border p-6 rounded-xl flex flex-col justify-between hover:border-brand-gold transition-colors">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="font-serif font-bold text-xl text-brand-cream">Corte Clásico / Moderno</h3>
+                                <span class="font-serif font-bold text-xl text-brand-gold">$20.000 COP</span>
+                            </div>
+                            <p class="text-sm text-brand-cream/70 mb-4">Asesoría de imagen, lavado, corte con tijera o máquina y peinado final.</p>
+                        </div>
+                        <a href="https://wa.me/570000000000?text=Hola,%20deseo%20reservar%20un%20Corte%20de%20Cabello" target="_blank" class="w-full text-center gold-border py-2 rounded font-semibold text-sm hover:bg-brand-gold hover:text-brand-black transition-colors block mt-4">
+                            Reservar Corte
+                        </a>
+                    </div>
+
+                    <!-- SERVICIO 2 -->
+                    <div class="card-bg gold-border p-6 rounded-xl flex flex-col justify-between hover:border-brand-gold transition-colors">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="font-serif font-bold text-xl text-brand-cream">Perfilado de Barba</h3>
+                                <span class="font-serif font-bold text-xl text-brand-gold">$15.000 COP</span>
+                            </div>
+                            <p class="text-sm text-brand-cream/70 mb-4">Diseño de líneas, afeitado a navaja tradicional con toalla caliente e hidratación.</p>
+                        </div>
+                        <a href="https://wa.me/570000000000?text=Hola,%20deseo%20reservar%20Perfilado%20de%20Barba" target="_blank" class="w-full text-center gold-border py-2 rounded font-semibold text-sm hover:bg-brand-gold hover:text-brand-black transition-colors block mt-4">
+                            Reservar Barba
+                        </a>
+                    </div>
+
+                    <!-- SERVICIO 3 -->
+                    <div class="card-bg gold-border p-6 rounded-xl flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute top-0 right-0 bg-brand-gold text-brand-black text-[10px] uppercase font-bold px-3 py-1 rounded-bl">
+                            Más Popular
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="font-serif font-bold text-xl text-brand-cream">Combo La Esquina</h3>
+                                <span class="font-serif font-bold text-xl text-brand-gold">$30.000 COP</span>
+                            </div>
+                            <p class="text-sm text-brand-cream/70 mb-4">Corte de cabello completo + perfilado y arreglo de barba completo.</p>
+                        </div>
+                        <a href="https://wa.me/570000000000?text=Hola,%20deseo%20reservar%20el%20Combo%20La%20Esquina" target="_blank" class="w-full text-center gold-gradient py-2.5 rounded font-bold text-sm shadow block mt-4 hover:brightness-110">
+                            Reservar Combo Especial
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA 4: GALERÍA DE ESTILOS -->
+        <section id="galeria" class="page-view py-16 bg-brand-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-brand-gold text-sm uppercase tracking-widest font-bold">ILUSTRACIÓN DE TRABAJOS</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-serif text-brand-cream mt-2">Galería de Cortes y Estilos</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div class="card-bg gold-border rounded-xl p-8 text-center flex flex-col items-center justify-center space-y-3">
+                        <span class="text-4xl">💈</span>
+                        <h4 class="font-serif font-bold text-brand-gold">Degradado Low Fade</h4>
+                        <p class="text-xs text-brand-cream/60">Corte pulido con transición suave lateral.</p>
+                    </div>
+
+                    <div class="card-bg gold-border rounded-xl p-8 text-center flex flex-col items-center justify-center space-y-3">
+                        <span class="text-4xl">🪒</span>
+                        <h4 class="font-serif font-bold text-brand-gold">Barba Ritual Clasico</h4>
+                        <p class="text-xs text-brand-cream/60">Afeitado tradicional con alineación limpia.</p>
+                    </div>
+
+                    <div class="card-bg gold-border rounded-xl p-8 text-center flex flex-col items-center justify-center space-y-3">
+                        <span class="text-4xl">✂️</span>
+                        <h4 class="font-serif font-bold text-brand-gold">Corte Mid Fade</h4>
+                        <p class="text-xs text-brand-cream/60">Estilo urbano estructurado y moderno.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA 5: PREGUNTAS FRECUENTES (FAQ) -->
+        <section id="faq" class="page-view py-16 bg-brand-black">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12">
+                    <span class="text-brand-gold text-sm uppercase tracking-widest font-bold">RESOLVEMOS TUS DUDAS</span>
+                    <h2 class="text-3xl font-bold font-serif text-brand-cream mt-2">Preguntas Frecuentes</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="card-bg gold-border p-5 rounded-lg">
+                        <h3 class="font-serif font-bold text-brand-gold text-lg mb-2">¿Atienden sin cita previa?</h3>
+                        <p class="text-sm text-brand-cream/80">Atendemos por orden de llegada y por citas agendadas por WhatsApp. Recomendamos agendar previa reserva para asegurar tu turno sin esperas.</p>
+                    </div>
+
+                    <div class="card-bg gold-border p-5 rounded-lg">
+                        <h3 class="font-serif font-bold text-brand-gold text-lg mb-2">¿Cuáles son los medios de pago aceptados?</h3>
+                        <p class="text-sm text-brand-cream/80">Aceptamos efectivo y transferencias digitales [Medios exactos pendientes de confirmación por el propietario].</p>
+                    </div>
+
+                    <div class="card-bg gold-border p-5 rounded-lg">
+                        <h3 class="font-serif font-bold text-brand-gold text-lg mb-2">¿Dónde están ubicados?</h3>
+                        <p class="text-sm text-brand-cream/80">Estamos ubicados en la dirección del barrio local [Dirección exacta pendiente de confirmación por el propietario].</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA 6: CONTACTO Y UBICACIÓN -->
+        <section id="contacto" class="page-view py-16 bg-brand-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-brand-gold text-sm uppercase tracking-widest font-bold">UBICACIÓN Y CONTACTO</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-serif text-brand-cream mt-2">Visítanos o Escríbenos</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- INFORMACIÓN DE CONTACTO -->
+                    <div class="card-bg gold-border p-8 rounded-2xl space-y-6">
+                        <h3 class="font-serif font-bold text-2xl text-brand-cream">Datos de Atención</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4">
+                                <span class="text-2xl">📍</span>
+                                <div>
+                                    <h4 class="font-bold text-brand-gold">Dirección</h4>
+                                    <p class="text-sm text-brand-cream/70">[Dirección y Barrio por confirmar por el propietario]</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <span class="text-2xl">📱</span>
+                                <div>
+                                    <h4 class="font-bold text-brand-gold">WhatsApp / Teléfono</h4>
+                                    <p class="text-sm text-brand-cream/70">[Número telefónico oficial por confirmar]</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <span class="text-2xl">🕒</span>
+                                <div>
+                                    <h4 class="font-bold text-brand-gold">Horarios de Atención</h4>
+                                    <p class="text-sm text-brand-cream/70">Lunes a Sábado: [Horario por confirmar]</p>
+                                    <p class="text-sm text-brand-cream/70">Domingos y Festivos: [Por confirmar]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4">
+                            <a href="https://wa.me/570000000000?text=Hola,%20deseo%20consultar%20disponibilidad" target="_blank" class="w-full text-center block gold-gradient py-3 rounded.md font-bold text-brand-black shadow-lg hover:brightness-110">
+                                💬 Iniciar Chat de WhatsApp
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- FORMULARIO DE MENSAJE -->
+                    <div class="card-bg gold-border p-8 rounded-2xl">
+                        <h3 class="font-serif font-bold text-2xl text-brand-cream mb-6">Enviar una Consulta</h3>
+                        <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-brand-gold mb-1">Nombre Completo</label>
+                                <input type="text" required placeholder="Tu nombre" class="w-full bg-brand-black border border-brand-gray/80 rounded px-4 py-3 text-brand-cream focus:outline-none focus:border-brand-gold">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-brand-gold mb-1">Servicio de Interés</label>
+                                <select class="w-full bg-brand-black border border-brand-gray/80 rounded px-4 py-3 text-brand-cream focus:outline-none focus:border-brand-gold">
+                                    <option>Corte de Cabello</option>
+                                    <option>Perfilado de Barba</option>
+                                    <option>Combo Corte + Barba</option>
+                                    <option>Otra consulta</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-brand-gold mb-1">Mensaje o Fecha Deseada</label>
+                                <textarea rows="3" required placeholder="¿Cuándo te gustaría venir?" class="w-full bg-brand-black border border-brand-gray/80 rounded px-4 py-3 text-brand-cream focus:outline-none focus:border-brand-gold"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full gold-gradient py-3 rounded font-bold text-brand-black hover:brightness-110 shadow-lg">
+                                Enviar Consulta por WhatsApp
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer class="bg-brand-dark border-t border-brand-gray/50 py-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="font-serif font-bold text-brand-gold text-lg mb-2">BARBERÍA LA ESQUINA</h4>
+                    <p class="text-xs text-brand-cream/60">Cuidado personal masculino, tradición y estilo en tu barrio.</p>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-brand-cream text-sm mb-2">Páginas</h5>
+                    <ul class="text-xs space-y-1 text-brand-cream/70">
+                        <li><a href="#inicio" onclick="navigateTo('inicio', event)" class="hover:text-brand-gold">Inicio</a></li>
+                        <li><a href="#servicios" onclick="navigateTo('servicios', event)" class="hover:text-brand-gold">Servicios</a></li>
+                        <li><a href="#contacto" onclick="navigateTo('contacto', event)" class="hover:text-brand-gold">Ubicación</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold text-brand-cream text-sm mb-2">Estudiante a cargo</h5>
+                    <p class="text-xs text-brand-cream/70">Royner Andrés Romaña Arroyo</p>
+                    <p class="text-[10px] text-brand-gold mt-1">Proyecto Desarrollo Web 2026</p>
+                </div>
+            </div>
+
+            <div class="border-t border-brand-gray/40 pt-6 text-center text-xs text-brand-cream/40">
+                © 2026 Barbería La Esquina. Todos los derechos reservados. Datos sujetas a confirmación final.
+            </div>
+        </div>
+    </footer>
+
+    <!-- LÓGICA DE NAVEGACIÓN SPA MULTIPÁGINA NATIVA -->
+    <script>
+        // Enrutador Multipágina
+        function navigateTo(pageId, event) {
+            if (event) event.preventDefault();
+            
+            // Ocultar todas las páginas
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // Mostrar la página seleccionada
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Actualizar links activos
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.getAttribute('data-page') === pageId) {
+                        link.classList.add('text-brand-gold', 'bg-brand-gray/40');
+                    } else {
+                        link.classList.remove('text-brand-gold', 'bg-brand-gray/40');
+                    }
+                });
+
+                // Actualizar hash de la URL
+                history.pushState(null, null, '#' + pageId);
+            }
+        }
+
+        // Toggle del Menú Móvil
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Enviar formulario a WhatsApp
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert('Redirigiendo a WhatsApp para enviar tu consulta...');
+            window.open('https://wa.me/570000000000?text=Hola,%20quisiera%20consultar%20por%20un%20turno', '_blank');
+        }
+
+        // Inicializar página al cargar según el Hash o por defecto "inicio"
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '') || 'inicio';
+            navigateTo(hash);
+        });
+
+        // Soporte para botón atrás/adelante del navegador
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash.replace('#', '') || 'inicio';
+            navigateTo(hash);
+        });
+    </script>
+</body>
+</html>
